@@ -54,3 +54,24 @@ exports.findMyOrder = async (req, res) => {
     data: getMyOrder,
   });
 };
+
+exports.createOrder = async (req, res) => {
+  const loginId = req.loginId;
+
+  const tixId = `${new Date().getFullYear()}-00${Date.now()}-${loginId}`;
+
+  const inputOrder = {
+    tix_id: tixId,
+    order_date: new Date(),
+    go_date: '2023-05-28',
+    fee: 10000,
+    total_cost: 150000,
+    payment_method: 'BRI',
+    status: false,
+    UserId: loginId,
+    CarId: 1,
+    DestinationId: 1,
+  };
+
+  res.send(inputOrder);
+};

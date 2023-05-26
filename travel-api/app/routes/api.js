@@ -11,8 +11,10 @@ apiRoute.get('/', function(req, res) {
     users: {
       judul: 'Daftar dan login user',
       endpointSignUp: '[POST]: /auth/signup',
+      requestBodySignUp: 'name, email, password, address, role = (USER, STAFF, PM, ADMIN)',
       deskripsiSignUp: 'Mendaftarkan user baru',
       endpointSignIn: '[POST]: /auth/signin',
+      requestBodySignIn: 'email, password',
       deskripsiSignIn: 'Login user untuk mendapatkan accessToken',
     },
     roles: {
@@ -26,6 +28,9 @@ apiRoute.get('/', function(req, res) {
       judul: 'Menampilkan data order',
       endpointOrder: '[GET]: /order',
       deskripsiorder: 'Menampilkan order anda (login user)',
+      endpointOrderAdd: '[POST]: /order',
+      requestBodyOrderAdd: '',
+      deskripsiorderAdd: 'Menampilkan order anda (login user)',
       endpointOrderAdmin: '[GET]: /order/admin',
       deskripsiOrderAdmin: 'Menampilkan semua data order [Role PM keatas]',
       endpointOrderFind: '[GET]: /order/find/:tix_id',
@@ -85,6 +90,18 @@ apiRoute.get('/roles/:role', (req, res) => {
 apiRoute.get('/order', (req, res) => {
   try {
     auth.verifyToken(req, res, orderController.findMyOrder);
+  } catch (err) {
+    console.log('>> Error: ' + err);
+    res.status(400).send({
+      request_status: false,
+      message: err.message,
+    });
+  }
+});
+
+apiRoute.post('/order', (req, res) => {
+  try {
+    auth.verifyToken(req, res, orderController.createOrder);
   } catch (err) {
     console.log('>> Error: ' + err);
     res.status(400).send({
