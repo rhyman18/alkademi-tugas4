@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      tx_id: {
+      tix_id: {
         allowNull: false,
         unique: true,
         type: Sequelize.STRING,
@@ -39,15 +39,15 @@ module.exports = {
         defaultValue: false,
         type: Sequelize.BOOLEAN,
       },
-      customer_id: {
+      UserId: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      car_id: {
+      CarId: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      destination_id: {
+      DestinationId: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
