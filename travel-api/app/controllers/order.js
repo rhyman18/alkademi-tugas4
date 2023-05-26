@@ -28,3 +28,29 @@ exports.findOne = async (req, res) => {
     data: getOrder,
   });
 };
+
+exports.findMyOrder = async (req, res) => {
+  const loginId = req.loginId;
+
+  const getMyOrder = await Order.findAll({
+    where: {
+      UserId: loginId,
+    },
+  });
+
+  if (getMyOrder.length === 0) {
+    res.status(400).send({
+      request_status: true,
+      message: 'Anda belum order, ayo segera order.',
+    });
+    return;
+  }
+
+  console.log('>> Berhasil mendapatkan data order');
+
+  res.send({
+    request_status: true,
+    message: 'Menampilkan list order yang tersedia.',
+    data: getMyOrder,
+  });
+};

@@ -32,6 +32,7 @@ exports.verifyToken = async (req, res, next, role = 1) => {
     }
 
     console.log('>> Token terautentikasi.');
+    req.loginId = decoded.id;
 
     const getUser = await User.findOne({
       where: {

@@ -10,17 +10,26 @@ apiRoute.get('/', function(req, res) {
     judul: 'Panduan API',
     users: {
       judul: 'Daftar dan login user',
-      endpointSignUp: '/auth/signup',
+      endpointSignUp: '[POST]: /auth/signup',
       deskripsiSignUp: 'Mendaftarkan user baru',
-      endpointSignIn: '/auth/signin',
+      endpointSignIn: '[POST]: /auth/signin',
       deskripsiSignIn: 'Login user untuk mendapatkan accessToken',
     },
     roles: {
-      judul: 'Menampilkan data roles',
-      endpointRoles: '/roles',
+      judul: 'Menampilkan data roles [Role PM keatas]',
+      endpointRoles: '[GET]: /roles',
       deskripsiRoles: 'Menampilkan semua data roles',
-      endpointRoleUsers: '/roles/:role',
+      endpointRoleUsers: '[GET]: /roles/:role',
       deskripsiRoleUsers: 'Menampilkan daftar users berdasarkan role',
+    },
+    order: {
+      judul: 'Menampilkan data order',
+      endpointOrder: '[GET]: /order',
+      deskripsiorder: 'Menampilkan order anda (login user)',
+      endpointOrderAdmin: '[GET]: /order/admin',
+      deskripsiOrderAdmin: 'Menampilkan semua data order [Role PM keatas]',
+      endpointOrderFind: '[GET]: /order/find/:tix_id',
+      deskripsiOrderFind: 'Mencara order berdasarkan tix_id',
     },
   });
 });
@@ -73,6 +82,18 @@ apiRoute.get('/roles/:role', (req, res) => {
   }
 });
 
+apiRoute.get('/order', (req, res) => {
+  try {
+    auth.verifyToken(req, res, orderController.findMyOrder);
+  } catch (err) {
+    console.log('>> Error: ' + err);
+    res.status(400).send({
+      request_status: false,
+      message: err.message,
+    });
+  }
+});
+
 apiRoute.get('/order/admin', (req, res) => {
   try {
     auth.verifyToken(req, res, orderController.findAll, 3);
@@ -87,7 +108,7 @@ apiRoute.get('/order/admin', (req, res) => {
 
 apiRoute.get('/order/find/:tix_id', (req, res) => {
   try {
-    auth.verifyToken(req, res, orderController.findAll, 3);
+    auth.verifyToken(req, res, orderController.findAll);
   } catch (err) {
     console.log('>> Error: ' + err);
     res.status(400).send({
