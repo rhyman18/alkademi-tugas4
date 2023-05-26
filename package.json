@@ -17,7 +17,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sudah-fix": "node authentication-migrate/server.js"
+    "sudah-fix": "node authentication-migrate/server.js",
+    "dev": "node travel-api/server.js"
   },
   "keywords": [],
   "author": "",
