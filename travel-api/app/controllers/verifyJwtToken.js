@@ -12,6 +12,12 @@ exports.verifyToken = async (req, res, next, role = 1) => {
       message: 'Unauthorized.',
     });
     return;
+  } else if (tokenHeader.split(' ')[0] !== 'Bearer') {
+    res.status(500).send({
+      request_status: false,
+      message: 'Incorrect token format, use Bearer as a prefix.',
+    });
+    return;
   }
 
   const token = tokenHeader.split(' ')[1];

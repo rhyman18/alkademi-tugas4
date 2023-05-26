@@ -57,9 +57,6 @@ const apiRoute = require('./app/routes/api');
 
 app.use('/api/', apiRoute);
 
-// const userController = require('./app/controllers/user');
-// app.post('/auth/signup', userController.signUp);
-
 app.listen(port, () => {
   console.log(`>> ${title} - Server listening on ${baseUrl}`);
 });
