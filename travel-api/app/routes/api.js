@@ -29,7 +29,7 @@ apiRoute.get('/', function(req, res) {
       endpointOrder: '[GET]: /order',
       deskripsiorder: 'Menampilkan order anda (login user)',
       endpointOrderAdd: '[POST]: /order',
-      requestBodyOrderAdd: '',
+      requestBodyOrderAdd: 'from_location - to_location (JAKARTA, BANDUNG, YOGYAKARTA), payment_method, go_date (yyyy-mm-dd hh:mm:ss), car (pilih 1-5)',
       deskripsiorderAdd: 'Menampilkan order anda (login user)',
       endpointOrderAdmin: '[GET]: /order/admin',
       deskripsiOrderAdmin: 'Menampilkan semua data order [Role PM keatas]',
@@ -125,7 +125,7 @@ apiRoute.get('/order/admin', (req, res) => {
 
 apiRoute.get('/order/find/:tix_id', (req, res) => {
   try {
-    auth.verifyToken(req, res, orderController.findAll);
+    auth.verifyToken(req, res, orderController.findOne);
   } catch (err) {
     console.log('>> Error: ' + err);
     res.status(400).send({

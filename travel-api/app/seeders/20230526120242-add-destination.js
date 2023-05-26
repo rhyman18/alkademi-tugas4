@@ -13,7 +13,7 @@ module.exports = {
      * }], {});
      *
     */
-    await queryInterface.bulkInsert('People', [
+    await queryInterface.bulkInsert('Destinations', [
       {
         from_terminal_id: 1,
         to_terminal_id: 2,
@@ -72,5 +72,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete('Destinations', null, {});
   },
 };
