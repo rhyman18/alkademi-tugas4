@@ -13,10 +13,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
+    "eslint": "^8.41.0",
+    "eslint-config-google": "^0.14.0",
     "sequelize-cli": "^6.6.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint travel-api --fix",
     "sudah-fix": "node authentication-migrate/server.js",
     "dev": "node travel-api/server.js"
   },

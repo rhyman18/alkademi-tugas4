@@ -1,6 +1,6 @@
-require('dotenv').config()
+require('dotenv').config();
 
 module.exports = {
-    'secret': process.env.SECRET,
-    ROLEs: ['USER', 'ADMIN', 'PM']
+  'secret': process.env.SECRET,
+  'ROLEs': ['USER', 'ADMIN', 'PM'],
 };

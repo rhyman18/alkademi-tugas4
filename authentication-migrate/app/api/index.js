@@ -4,8 +4,8 @@ const verifyJwtToken = require('./verifyJwtToken');
 const status = require('./status');
 
 module.exports = {
-    verifySign,
-    verifySignUp,
-    verifyJwtToken,
-    status,
+  verifySign,
+  verifySignUp,
+  verifyJwtToken,
+  status,
 };

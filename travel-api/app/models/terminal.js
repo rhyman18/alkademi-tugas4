@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Terminal extends Model {
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Terminal.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Terminal',

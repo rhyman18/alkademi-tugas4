@@ -13,10 +13,10 @@ module.exports = {
      * }], {});
     */
     await queryInterface.bulkInsert('Roles', [
-      { name: 'USER' },
-      { name: 'STAFF' },
-      { name: 'PM' },
-      { name: 'ADMIN' },
+      {name: 'USER'},
+      {name: 'STAFF'},
+      {name: 'PM'},
+      {name: 'ADMIN'},
     ], {});
   },
 
@@ -28,5 +28,5 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('Roles', null, {});
-  }
+  },
 };

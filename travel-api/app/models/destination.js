@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Destination extends Model {
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.INTEGER,
     mileage: DataTypes.INTEGER,
     from_terminal_id: DataTypes.INTEGER,
-    to_terminal_id: DataTypes.INTEGER
+    to_terminal_id: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Destination',

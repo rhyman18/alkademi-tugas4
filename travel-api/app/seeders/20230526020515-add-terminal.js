@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -13,13 +13,13 @@ module.exports = {
      * }], {});
     */
     await queryInterface.bulkInsert('Terminals', [
-      { name: 'JAKARTA' },
-      { name: 'BANDUNG' },
-      { name: 'YOGYAKARTA' },
+      {name: 'JAKARTA'},
+      {name: 'BANDUNG'},
+      {name: 'YOGYAKARTA'},
     ], {});
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
@@ -27,5 +27,5 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('Terminals', null, {});
-  }
+  },
 };
