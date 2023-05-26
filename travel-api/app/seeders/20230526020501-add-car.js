@@ -16,22 +16,32 @@ module.exports = {
       {
         name: 'SUZUKI APV',
         license: 'B 3746 VM',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         name: 'DAIHATSU LUXIO',
         license: 'B 7864 VW',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         name: 'TOYOTA HIACE',
         license: 'B 8342 BA',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         name: 'ISUZU ELF MICROBUS',
         license: 'B 3248 AT',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         name: 'TOYOTA ALPHARD',
         license: 'B 8734 ZA',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ], {});
   },

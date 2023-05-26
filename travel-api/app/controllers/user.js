@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../models');
@@ -68,7 +69,7 @@ exports.signUp = async (req, res) => {
   console.log('>> Berhasil mendaftarkan user');
   res.send({
     request_status: true,
-    message: 'User created',
+    message: 'User berhasil dibuat, silahkan lanjutkan sign in.',
     data: {
       id: createUser.id,
       name: inputUser.name,
@@ -122,17 +123,20 @@ exports.signIn = async (req, res) => {
   }
 
   const token = jwt.sign({
-    email: getUser.email,
-  }, getUser.password, {
+    id: getUser.id,
+  }, process.env.SECRET, {
     expiresIn: 86400,
   });
 
   console.log('>> Berhasil login');
   res.send({
-    auth: verifyPassword,
-    name: getUser.name,
-    email: getUser.email,
-    role: getUser.Role.name,
+    request_status: verifyPassword,
+    message: 'User berhasil login. Gunakan Akses token untuk mengakses API.',
+    data: {
+      name: getUser.name,
+      email: getUser.email,
+      role: getUser.Role.name,
+    },
     accessToken: token,
   });
 };

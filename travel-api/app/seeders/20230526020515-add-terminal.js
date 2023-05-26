@@ -13,9 +13,9 @@ module.exports = {
      * }], {});
     */
     await queryInterface.bulkInsert('Terminals', [
-      {name: 'JAKARTA'},
-      {name: 'BANDUNG'},
-      {name: 'YOGYAKARTA'},
+      {name: 'JAKARTA', createdAt: new Date(), updatedAt: new Date()},
+      {name: 'BANDUNG', createdAt: new Date(), updatedAt: new Date()},
+      {name: 'YOGYAKARTA', createdAt: new Date(), updatedAt: new Date()},
     ], {});
   },
 
