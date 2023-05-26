@@ -50,7 +50,7 @@ apiRoute.post('/auth/signin', (req, res) => {
 
 apiRoute.get('/roles', (req, res) => {
   try {
-    auth.verifyToken(req, res, roleController.findAll);
+    auth.verifyToken(req, res, roleController.findAll, 3);
   } catch (err) {
     console.log('>> Error: ' + err);
     res.status(400).send({
@@ -62,7 +62,7 @@ apiRoute.get('/roles', (req, res) => {
 
 apiRoute.get('/roles/:role', (req, res) => {
   try {
-    auth.verifyToken(req, res, roleController.findOne);
+    auth.verifyToken(req, res, roleController.findOne, 3);
   } catch (err) {
     console.log('>> Error: ' + err);
     res.status(400).send({
