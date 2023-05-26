@@ -3,6 +3,7 @@ const apiRoute = express.Router();
 const userController = require('../controllers/user');
 const roleController = require('../controllers/role');
 const orderController = require('../controllers/order');
+const destinationController = require('../controllers/destination');
 const auth = require('../controllers/verifyJwtToken');
 
 apiRoute.get('/', function(req, res) {
@@ -35,6 +36,14 @@ apiRoute.get('/', function(req, res) {
       deskripsiOrderAdmin: 'Menampilkan semua data order [Role PM keatas]',
       endpointOrderFind: '[GET]: /order/find/:tix_id',
       deskripsiOrderFind: 'Mencara order berdasarkan tix_id',
+    },
+    destination: {
+      judul: 'Menampilkan destinasi/rute travel kami',
+      endpointDestination: '[GET]: /destination',
+      deskripsiDestination: 'Menampilkan semua destinasi',
+      endpointDestinationAdd: '[POST]: /destination',
+      requestBodyDestinationAdd: 'from_location - to_location (PASTIKAN MENAMBAH KOTA BARU DULU), price, mileage',
+      deskripsiDestinationAdd: 'Menambahkan destinasi kota yang belum terdaftar [Role PM Keatas]',
     },
   });
 });
@@ -126,6 +135,30 @@ apiRoute.get('/order/admin', (req, res) => {
 apiRoute.get('/order/find/:tix_id', (req, res) => {
   try {
     auth.verifyToken(req, res, orderController.findOne);
+  } catch (err) {
+    console.log('>> Error: ' + err);
+    res.status(400).send({
+      request_status: false,
+      message: err.message,
+    });
+  }
+});
+
+apiRoute.get('/destination', (req, res) => {
+  try {
+    auth.verifyToken(req, res, destinationController.findAll);
+  } catch (err) {
+    console.log('>> Error: ' + err);
+    res.status(400).send({
+      request_status: false,
+      message: err.message,
+    });
+  }
+});
+
+apiRoute.post('/destination', (req, res) => {
+  try {
+    auth.verifyToken(req, res, destinationController.create, 3);
   } catch (err) {
     console.log('>> Error: ' + err);
     res.status(400).send({

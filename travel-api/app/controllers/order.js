@@ -138,7 +138,7 @@ exports.createOrder = async (req, res) => {
 
   const getCar = await Car.findOne({
     where: {
-      id: req.body.car
+      id: req.body.car,
     },
   });
 
@@ -178,7 +178,7 @@ exports.createOrder = async (req, res) => {
 
   res.send({
     request_status: true,
-    message: 'Menampilkan list order yang tersedia.',
+    message: 'Berhasil booking, silahkan lakukan pembayaran terlebih dahulu.',
     data: {
       tix_id: inputOrder.tix_id,
       order_date: inputOrder.order_date,
