@@ -46,6 +46,14 @@ apiRoute.get('/', function(req, res) {
       requestBodyDestinationAdd: 'from_location - to_location (PASTIKAN MENAMBAH KOTA BARU DULU), price, mileage',
       deskripsiDestinationAdd: 'Menambahkan destinasi kota yang belum terdaftar [Role PM Keatas]',
     },
+    city: {
+      judul: 'Menampilkan daftar kota yang tersedia',
+      endpointCity: '[GET]: /city',
+      deskripsiCity: 'Menampilkan list kota yang terdaftar',
+      endpointCityAdd: '[POST]: /city',
+      requestBodyCityAdd: 'name',
+      deskripsiCityAdd: 'Menambah kota baru untuk jadi rute destinasi [Role PM Keatas]',
+    },
   });
 });
 
@@ -172,6 +180,18 @@ apiRoute.post('/destination', (req, res) => {
 apiRoute.get('/city', (req, res) => {
   try {
     auth.verifyToken(req, res, terminalController.findAll);
+  } catch (err) {
+    console.log('>> Error: ' + err);
+    res.status(400).send({
+      request_status: false,
+      message: err.message,
+    });
+  }
+});
+
+apiRoute.post('/city', (req, res) => {
+  try {
+    auth.verifyToken(req, res, terminalController.create, 3);
   } catch (err) {
     console.log('>> Error: ' + err);
     res.status(400).send({

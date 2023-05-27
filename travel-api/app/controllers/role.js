@@ -5,6 +5,7 @@ exports.findAll = async (req, res) => {
   const getRole = await Role.findAll();
 
   console.log('>> Berhasil mendapatkan data role');
+
   res.send({
     request_status: true,
     message: 'Menampilkan list role yang tersedia.',
@@ -21,6 +22,7 @@ exports.findOne = async (req, res) => {
   });
 
   console.log('>> Berhasil mendapatkan data role');
+
   res.send({
     request_status: true,
     message: 'Menampilkan list users berdasarkan role nya.',
