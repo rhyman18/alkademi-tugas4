@@ -18,3 +18,6 @@
 ## Cara Penggunaan
 - Untuk perbaikan code dari sesi zoom ketik `npm run sudah-fix` (jangan lupa untuk migrate dan seed roles table sebelumnya)
 - Untuk menjalankan project Travel API ketik `npm run dev` (jangan lupa untuk migrate dan seed sebelumnya)
+
+## ERD Database
+<img align="center" src="travel-api/db_travel.drawio.png" />
