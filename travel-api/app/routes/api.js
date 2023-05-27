@@ -1,5 +1,6 @@
 const express = require('express');
 const apiRoute = express.Router();
+const carController = require('../controllers/car');
 const userController = require('../controllers/user');
 const roleController = require('../controllers/role');
 const orderController = require('../controllers/order');
@@ -11,7 +12,7 @@ apiRoute.get('/', function(req, res) {
   res.send({
     judul: 'Panduan API',
     users: {
-      judul: 'Daftar dan login user',
+      judul: 'Mengelola users, daftar dan login',
       endpointSignUp: '[POST]: /auth/signup',
       requestBodySignUp: 'name, email, password, address, role = (USER, STAFF, PM, ADMIN)',
       deskripsiSignUp: 'Mendaftarkan user baru',
@@ -27,7 +28,7 @@ apiRoute.get('/', function(req, res) {
       deskripsiRoleUsers: 'Menampilkan daftar users berdasarkan role',
     },
     order: {
-      judul: 'Menampilkan data order',
+      judul: 'Mengelola bagian order/booking',
       endpointOrder: '[GET]: /order',
       deskripsiorder: 'Menampilkan order anda (login user)',
       endpointOrderAdd: '[POST]: /order',
@@ -39,7 +40,7 @@ apiRoute.get('/', function(req, res) {
       deskripsiOrderFind: 'Mencara order berdasarkan tix_id',
     },
     destination: {
-      judul: 'Menampilkan destinasi/rute travel kami',
+      judul: 'Mengelola bagian destinasi/rute travel',
       endpointDestination: '[GET]: /destination',
       deskripsiDestination: 'Menampilkan semua destinasi',
       endpointDestinationAdd: '[POST]: /destination',
@@ -47,12 +48,20 @@ apiRoute.get('/', function(req, res) {
       deskripsiDestinationAdd: 'Menambahkan destinasi kota yang belum terdaftar [Role PM Keatas]',
     },
     city: {
-      judul: 'Menampilkan daftar kota yang tersedia',
+      judul: 'Mengelola bagian kota',
       endpointCity: '[GET]: /city',
       deskripsiCity: 'Menampilkan list kota yang terdaftar',
       endpointCityAdd: '[POST]: /city',
       requestBodyCityAdd: 'name',
       deskripsiCityAdd: 'Menambah kota baru untuk jadi rute destinasi [Role PM Keatas]',
+    },
+    car: {
+      judul: 'Mengelola bagian kendaraan',
+      endpointCity: '[GET]: /car',
+      deskripsiCity: 'Menampilkan list kendaraan yang terdaftar',
+      endpointCityAdd: '[POST]: /car',
+      requestBodyCityAdd: 'name, license',
+      deskripsiCityAdd: 'Menambah unit kendaraan baru [Role PM Keatas]',
     },
   });
 });
@@ -192,6 +201,30 @@ apiRoute.get('/city', (req, res) => {
 apiRoute.post('/city', (req, res) => {
   try {
     auth.verifyToken(req, res, terminalController.create, 3);
+  } catch (err) {
+    console.log('>> Error: ' + err);
+    res.status(400).send({
+      request_status: false,
+      message: err.message,
+    });
+  }
+});
+
+apiRoute.get('/car', (req, res) => {
+  try {
+    auth.verifyToken(req, res, carController.findAll);
+  } catch (err) {
+    console.log('>> Error: ' + err);
+    res.status(400).send({
+      request_status: false,
+      message: err.message,
+    });
+  }
+});
+
+apiRoute.post('/car', (req, res) => {
+  try {
+    auth.verifyToken(req, res, carController.create, 3);
   } catch (err) {
     console.log('>> Error: ' + err);
     res.status(400).send({
