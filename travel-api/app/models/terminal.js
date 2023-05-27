@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Terminal',
+    timestamps: false,
   });
   return Terminal;
 };

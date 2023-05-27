@@ -3,6 +3,7 @@ const apiRoute = express.Router();
 const userController = require('../controllers/user');
 const roleController = require('../controllers/role');
 const orderController = require('../controllers/order');
+const terminalController = require('../controllers/terminal');
 const destinationController = require('../controllers/destination');
 const auth = require('../controllers/verifyJwtToken');
 
@@ -159,6 +160,18 @@ apiRoute.get('/destination', (req, res) => {
 apiRoute.post('/destination', (req, res) => {
   try {
     auth.verifyToken(req, res, destinationController.create, 3);
+  } catch (err) {
+    console.log('>> Error: ' + err);
+    res.status(400).send({
+      request_status: false,
+      message: err.message,
+    });
+  }
+});
+
+apiRoute.get('/city', (req, res) => {
+  try {
+    auth.verifyToken(req, res, terminalController.findAll);
   } catch (err) {
     console.log('>> Error: ' + err);
     res.status(400).send({
