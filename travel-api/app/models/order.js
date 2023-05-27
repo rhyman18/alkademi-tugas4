@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     go_date: DataTypes.DATE,
     fee: DataTypes.INTEGER,
     total_cost: DataTypes.INTEGER,
+    payment_method: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
     UserId: DataTypes.INTEGER,
     CarId: DataTypes.INTEGER,
