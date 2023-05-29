@@ -8,16 +8,25 @@ const terminalController = require('../controllers/terminal');
 const destinationController = require('../controllers/destination');
 const auth = require('../controllers/verifyJwtToken');
 
-apiRoute.get('/', function(req, res) {
+apiRoute.get('/', function (req, res) {
   res.send({
     judul: 'Panduan API',
     users: {
       judul: 'Mengelola users, daftar dan login',
       endpointSignUp: '[POST]: /auth/signup',
-      requestBodySignUp: 'name, email, password, address, role = (USER, STAFF, PM, ADMIN)',
+      requestBodySignUp: {
+        name: 'STRING',
+        email: 'STRING UNIQUE',
+        password: 'STRING',
+        address: 'STRING',
+        role: 'ENUM (USER, STAFF, PM, ADMIN)',
+      },
       deskripsiSignUp: 'Mendaftarkan user baru',
       endpointSignIn: '[POST]: /auth/signin',
-      requestBodySignIn: 'email, password',
+      requestBodySignIn: {
+        email: 'STRING UNIQUE',
+        password: 'STRING',
+      },
       deskripsiSignIn: 'Login user untuk mendapatkan accessToken',
     },
     roles: {
@@ -32,7 +41,13 @@ apiRoute.get('/', function(req, res) {
       endpointOrder: '[GET]: /order',
       deskripsiorder: 'Menampilkan order anda (login user)',
       endpointOrderAdd: '[POST]: /order',
-      requestBodyOrderAdd: 'from_location - to_location (JAKARTA, BANDUNG, YOGYAKARTA), payment_method, go_date (yyyy-mm-dd hh:mm:ss), car (pilih 1-5)',
+      requestBodyOrderAdd: {
+        from_location: 'STRING (sementara tersedia: JAKARTA, BANDUNG, YOGYAKARTA)',
+        to_location: 'STRING',
+        payment_method: 'STRING',
+        go_date: 'DATE',
+        car: 'INTEGER (sementara tersedia: 1, 2, 3, 4, 5)',
+      },
       deskripsiorderAdd: 'Menampilkan order anda (login user)',
       endpointOrderAdmin: '[GET]: /order/admin',
       deskripsiOrderAdmin: 'Menampilkan semua data order [Role PM keatas]',
@@ -44,7 +59,12 @@ apiRoute.get('/', function(req, res) {
       endpointDestination: '[GET]: /destination',
       deskripsiDestination: 'Menampilkan semua destinasi',
       endpointDestinationAdd: '[POST]: /destination',
-      requestBodyDestinationAdd: 'from_location - to_location (PASTIKAN MENAMBAH KOTA BARU DULU), price, mileage',
+      requestBodyDestinationAdd: {
+        from_location: 'STRING (sementara tersedia: JAKARTA, BANDUNG, YOGYAKARTA)',
+        to_location: 'STRING',
+        price: 'INTEGER',
+        mileage: 'INTEGER',
+      },
       deskripsiDestinationAdd: 'Menambahkan destinasi kota yang belum terdaftar [Role PM Keatas]',
     },
     city: {
@@ -52,7 +72,9 @@ apiRoute.get('/', function(req, res) {
       endpointCity: '[GET]: /city',
       deskripsiCity: 'Menampilkan list kota yang terdaftar',
       endpointCityAdd: '[POST]: /city',
-      requestBodyCityAdd: 'name',
+      requestBodyCityAdd: {
+        name: 'STRING',
+      },
       deskripsiCityAdd: 'Menambah kota baru untuk jadi rute destinasi [Role PM Keatas]',
     },
     car: {
@@ -60,7 +82,10 @@ apiRoute.get('/', function(req, res) {
       endpointCity: '[GET]: /car',
       deskripsiCity: 'Menampilkan list kendaraan yang terdaftar',
       endpointCityAdd: '[POST]: /car',
-      requestBodyCityAdd: 'name, license',
+      requestBodyCityAdd: {
+        name: 'STRING',
+        license: 'STRING UNIQUE',
+      },
       deskripsiCityAdd: 'Menambah unit kendaraan baru [Role PM Keatas]',
     },
   });
