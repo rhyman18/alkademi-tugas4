@@ -10,7 +10,6 @@ module.exports = {
     return User
         .create({
           name: req.body.name,
-          id: req.body.id,
           email: req.body.email,
           password: bcrypt.hashSync(req.body.password, 8),
         }).then((user) => {
@@ -22,9 +21,9 @@ module.exports = {
             user.setRoles(roles).then(() => {
               res.status(200).send({
                 auth: true,
-                id: req.body.id,
+                name: req.body.name,
                 message: 'User registered successfully!',
-                errors: null,
+                errors: roles,
               });
             });
           }).catch((err) => {
@@ -37,7 +36,7 @@ module.exports = {
         }).catch((err) => {
           res.status(500).send({
             auth: false,
-            id: req.body.id,
+            name: req.body.name,
             message: 'Error',
             errors: err,
           });
@@ -48,13 +47,13 @@ module.exports = {
     return User
         .findOne({
           where: {
-            id: req.body.id,
+            name: req.body.name,
           },
         }).then((user) => {
           if (!user) {
             return res.status(404).send({
               auth: false,
-              id: req.body.id,
+              name: req.body.name,
               accessToken: null,
               message: 'Error',
               errors: 'User Not Found.',
@@ -65,7 +64,7 @@ module.exports = {
           if (!passwordIsValid) {
             return res.status(401).send({
               auth: false,
-              id: req.body.id,
+              name: req.body.name,
               accessToken: null,
               message: 'Error',
               errors: 'Invalid Password!',

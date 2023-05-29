@@ -36,6 +36,7 @@ app.use((req, res, next) => {
 require('./app/router/routes.js')(app);
 
 
-db.sequelize.sync().then(() => {
-  app.listen(port, () => console.log(title + ' run on ' + baseUrl));
-});
+// db.sequelize.sync().then(() => {
+// });
+
+app.listen(port, () => console.log(title + ' run on ' + baseUrl));

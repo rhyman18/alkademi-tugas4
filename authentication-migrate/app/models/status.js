@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Status.belongsTo(models.User, {
+        onDelete: 'CASCADE',
+        onUpdate: 'RESTRICT',
+      });
     }
   }
   Status.init({
@@ -19,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
     }, title: DataTypes.STRING,
     body: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    userId: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Status',
